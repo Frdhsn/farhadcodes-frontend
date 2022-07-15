@@ -4,7 +4,9 @@ import '../styles/App.css';
 import Layout from './Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Signup from './pages/SignUp';
+import Story from './Story';
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/stories/:id" element={<Story />} />
+          <Route exact path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>
