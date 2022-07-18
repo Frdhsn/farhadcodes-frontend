@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login.jpg';
 import authService from '../../services/authService';
 import classes from '../../styles/Login.module.css';
+import Button from '../Button';
 import Form from '../Form';
 import Illustration from '../Illustration';
 import TextInput from '../TextInput';
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,10 +15,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    console.log(`printing ${e}`);
     e.preventDefault();
     try {
-      await authService.login(email, password).then(
+      const res = await authService.login(email, password).then(
         () => {
           navigate('/');
           //window.location.reload();
@@ -28,6 +27,7 @@ const Login = () => {
           console.log(error);
         }
       );
+      //console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +57,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Submit Now</button>
+          <Button type="submit">Submit Now</Button>
 
           {error && <p className="error">{error}</p>}
 
