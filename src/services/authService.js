@@ -21,10 +21,15 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
+      // console.log(response);
+      console.log(response.data);
+      // console.log(response.data.data);
+      // console.log(response.data.data.token);
+      if (response.data.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
-      return response.data;
+      //console.log(`response data ${response.data}`);
+      return response.data.data;
     });
 };
 const logout = () => {

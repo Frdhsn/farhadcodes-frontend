@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/signup.jpg';
 import authService from '../../services/authService';
 import classes from '../../styles/Signup.module.css';
+import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Form from '../Form';
 import Illustration from '../Illustration';
@@ -17,6 +18,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState('');
 
   const navigate = useNavigate();
 
@@ -27,6 +29,8 @@ const Signup = () => {
       return setError("Passwords don't match");
     }
     try {
+      setError('');
+      setLoading(true);
       await authService.signUp(username, email, password).then(
         (response) => {
           navigate('/'); // home page
@@ -86,7 +90,10 @@ const Signup = () => {
 
           <Checkbox required text="I agree to the Terms &amp; Conditions" />
 
-          <button type="submit">Submit Now</button>
+          {/* <button type="submit">Submit Now</button> */}
+          <Button type="submit">
+            <span>Submit Now</span>
+          </Button>
 
           {error && <p className="error">{error}</p>}
           <div className="info">

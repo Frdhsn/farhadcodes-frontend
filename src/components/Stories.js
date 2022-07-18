@@ -2,14 +2,12 @@ import React from 'react';
 import classes from '../styles/Stories.module.css';
 import Story from './Story';
 
-export default function Stories() {
+export default function Stories({ posts }) {
   return (
     <div className={classes.stories}>
-      <Story />
-      <Story />
-      <Story />
-      <Story />
-      <Story />
+      {posts.map((st) => (
+        <Story post={st} />
+      ))}
     </div>
   );
 }
