@@ -1,33 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import classes from '../styles/Account.module.css';
+import { Context } from '../contexts/Context';
+import classes from './../styles/Account.module.css';
 
 export default function Account() {
-  // const { currentUser } = useAuth();
+  const { user, dispatch } = useContext(Context);
 
-  //console.log('testing ' + currentUser);
+  // console.log('testing ' + user);
+  // console.log('testing ' + user.data);
+  // console.log('testing ' + user.data.email);
+  console.log(user);
 
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' });
+  };
   return (
     <div className={classes.account}>
-      {
-        // /*currentUser ? (
-        //   <>
-        //     <span className="material-icons-outlined" title="Account">
-        //       account_circle
-        //     </span>
-
-        //     {/* <span>{currentUser.username}</span> */}
-        //     <span class="material-icons-outlined" title="Logout">
-        //       {' '}
-        //       logout{' '}
-        //     </span>
-        //   </>
-        // ) :
+      {user ? (
+        <>
+          <span className="material-icons-outlined" title="Account">
+            account_circle
+          </span>
+          <span>{user.data.email}</span>
+          <span className="material-icons-outlined" title="Logout" onClick={logout}>
+            {' '}
+            logout{' '}
+          </span>
+        </>
+      ) : (
         <>
           <Link to="/signup">Signup</Link>
-          <Link to="/login">/Login</Link>
+          <Link to="/login">Login</Link>
         </>
-      }
+      )}
     </div>
   );
 }

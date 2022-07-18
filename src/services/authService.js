@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const signUp = (name, email, password) => {
+  console.log(`signup a ashchi`);
   return axios
     .post('http://127.0.0.1:3005/api/v1/users/signup', {
       name,
@@ -8,7 +9,12 @@ const signUp = (name, email, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data.data);
+      console.log(response.data.data.token);
+
+      if (response.data.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       return response.data;
@@ -22,14 +28,14 @@ const login = (email, password) => {
     })
     .then((response) => {
       // console.log(response);
-      console.log(response.data);
+      //console.log(response.data);
       // console.log(response.data.data);
       // console.log(response.data.data.token);
       if (response.data.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       //console.log(`response data ${response.data}`);
-      return response.data.data;
+      return response.data;
     });
 };
 const logout = () => {

@@ -1,37 +1,51 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login.jpg';
+import { Context } from '../../contexts/Context';
 import authService from '../../services/authService';
 import classes from '../../styles/Login.module.css';
 import Button from '../Button';
 import Form from '../Form';
 import Illustration from '../Illustration';
 import TextInput from '../TextInput';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  //const userRef = useRef();
+  //const passwordRef = useRef();
+
   const [error, setError] = useState('');
 
+  const { user, dispatch, isFetching } = useContext(Context);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    dispatch({ type: 'LOGIN_START' });
     try {
+      setError('');
+      //const email = userRef.current.value;
+      //const password = passwordRef.current.value;
       const res = await authService.login(email, password).then(
         () => {
           navigate('/');
-          //window.location.reload();
+          window.location.reload();
         },
         (error) => {
           setError('Incorrect email or Password');
           console.log(error);
         }
       );
-      //console.log(res);
+      dispatch({ type: 'LOGIN_SUCCESSS', payload: res.data.data });
     } catch (err) {
+      dispatch({ type: 'LOGIN_FAILURE' });
       console.log(err);
     }
   };
+  //console.log(user);
+
   return (
     <>
       <h1>Login to your account</h1>
@@ -44,7 +58,6 @@ const Login = () => {
             type="text"
             placeholder="Enter email"
             icon="alternate_email"
-            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -53,11 +66,12 @@ const Login = () => {
             type="password"
             placeholder="Enter password"
             icon="lock"
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button type="submit">Submit Now</Button>
+          <Button type="submit" disabled={isFetching}>
+            Login
+          </Button>
 
           {error && <p className="error">{error}</p>}
 
