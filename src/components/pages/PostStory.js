@@ -8,7 +8,6 @@ export default function PostStory() {
   const [topic, setTopic] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [description, setDesc] = useState('');
-  const [file, setFile] = useState(null);
   const { user } = useContext(Context);
 
   const handleSubmit = async (e) => {
@@ -33,7 +32,7 @@ export default function PostStory() {
 
       const res = await instance.post('http://127.0.0.1:3005/api/v1/stories', newPost);
       console.log(`printing ` + res);
-      //window.location.replace('http://127.0.0.1:3005/api/v1/stories/' + res.data._id);
+      window.location.replace('http://localhost:3000/stories/user/' + user.data.user.id);
 
       console.log(`after axios post story`);
     } catch (err) {

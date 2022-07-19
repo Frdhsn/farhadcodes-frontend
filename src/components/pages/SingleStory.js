@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import classes from '../../styles/SingleStory.module.css';
 
@@ -26,6 +26,10 @@ export default function SingleStory() {
     };
     fetchUsername();
   }, [path2]);
+  const navigate = useNavigate();
+  const showAllStory = () => {
+    navigate('/stories/user/' + post.authorID);
+  };
   return (
     <>
       <div className={`${classes.singlePost}`}>
@@ -33,7 +37,13 @@ export default function SingleStory() {
           <h1 className={`${classes.singlePostTitle}`}>{post.title}</h1>
 
           <div className={`${classes.singlePostInfo}`}>
-            <span className={`${classes.singlePostAuthor}`}>Author: {user.name}</span>
+            <span
+              title="Click to see all blogs of this user"
+              className={`${classes.singlePostAuthor}`}
+              onClick={showAllStory}
+            >
+              Author: {user.name}
+            </span>
             <div>
               <span className={`${classes.singlePostDate}`}>
                 Created At: {new Date(post.createdAt).toDateString()}

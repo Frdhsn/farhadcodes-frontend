@@ -5,8 +5,16 @@ import classes from '../styles/Story.module.css';
 
 export default function Story({ post }) {
   //console.log(post);
+  let path = window.location.pathname;
+  //console.log(path);
+  if (path === '/') {
+    path = path + 'stories/' + post.id;
+  } else {
+    path = '/stories/' + post.id;
+  }
   return (
-    <Link to={`stories/${post.id}`}>
+    //<Link to={`stories/${post.id}`}>
+    <Link to={path}>
       <div className={classes.story}>
         <img src={image} alt="" />
         <p>

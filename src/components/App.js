@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound';
 import PostStory from './pages/PostStory';
 import Signup from './pages/SignUp';
 import SingleStory from './pages/SingleStory';
+import StoryByUser from './pages/StoryByUser';
 
 const App = () => {
   const { user } = useContext(Context);
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/stories/:id" element={<SingleStory />} />
+          <Route exact path="/stories/user/:id" element={<StoryByUser />} />
           <Route exact path="/write/" element={<PostStory />} />
           <Route exact path="*" element={<NotFound />} />
         </Routes>
