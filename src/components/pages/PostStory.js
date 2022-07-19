@@ -1,122 +1,56 @@
-import { Alert, AlertTitle, TextareaAutosize } from '@mui/material';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../Nav';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-}));
+import React, { useContext, useState } from 'react';
+import { Context } from '../../contexts/Context';
+import '../../styles/write.css';
 
 export default function PostStory() {
-  const classes = useStyles();
-  const navigate = useNavigate();
-  const [popUp, setPopUp] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [file, setFile] = useState(null);
+  const { user } = useContext(Context);
 
-  const [blogHeadline, setBlogHeadline] = useState('');
-  const [blogDescription, setBlogDescription] = useState('');
-
-  function submitHandelar(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios({
-      method: 'POST',
-      url: '/api/blogs/',
-      withCredentials: true,
-      data: { blogHeadline, blogDescription },
-      validateStatus: () => true,
-    }).then(
-      (res) => {
-        if (res.status === 201) {
-          localStorage.setItem('popup', 'Blog Created Successfully!!!!');
-          navigate('/');
-        } else {
-          setPopUp('Failed');
-          setErrorMessage(res.data.errors[0]);
-        }
-      },
-      (error) => {}
-    );
-    setTimeout(function () {
-      window.localStorage.removeItem('popup');
-    }, 2000);
-  }
+    const newPost = {
+      username: user.username,
+      title,
+      desc,
+    };
 
-  if (localStorage.getItem('username') !== null)
-    return (
-      <>
-        <CssBaseline />
-        <Navbar />
-        <Container component="main" maxWwdth="xs" style={{ paddingTop: 25 }}>
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            color="primary"
-            fontWeight="bold"
-            style={{ paddingTop: 10 }}
-          >
-            BlOG HEADLINE
-          </Typography>
-          <TextareaAutosize
-            id="outlined-multiline-static"
-            label="Blog Headline"
-            multiline
-            variant="outlined"
-            rows={2}
-            style={{ width: '100%' }}
-            value={blogHeadline}
-            onChange={(e) => setBlogHeadline(e.target.value)}
+    try {
+      const res = await axios.post('http://127.0.0.1:3005/api/v1/stories', newPost);
+      window.location.replace('http://127.0.0.1:3005/api/v1/stories/' + res.data._id);
+    } catch (err) {
+      console.log(`something went wrong`);
+    }
+  };
+  return (
+    <div className="write">
+      <form className="writeForm" onSubmit={handleSubmit}>
+        <div className="writeFormGroup">
+          {/* <label htmlFor="fileInput">
+            <i className="writeIcon fas fa-plus"></i>
+          </label> */}
+          <input
+            type="text"
+            placeholder="Title"
+            className="writeInput"
+            autoFocus={true}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            color="primary"
-            fontWeight="bold"
-            style={{ paddingBottom: 5 }}
-          >
-            BlOG DESCRIPTION
-          </Typography>
-          <TextareaAutosize
-            id="outlined-multiline-static"
-            label="Blog Headline"
-            fullWidth
-            multiline
-            variant="outlined"
-            rows={30}
-            style={{ width: '100%' }}
-            value={blogDescription}
-            onChange={(e) => setBlogDescription(e.target.value)}
-          />
-          <br /> <br />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={(e) => submitHandelar(e)}
-          >
-            Add Blog
-          </Button>
-          {popUp === 'Failed' && (
-            <Alert severity="error" fullwidth="true" style={{ paddingBottom: 20 }}>
-              <AlertTitle>Blog Creation Unsuccessfull!!</AlertTitle>
-              <strong>{errorMessage}</strong>
-            </Alert>
-          )}
-        </Container>
-      </>
-    );
-  //else return <PageNotFound />;
+        </div>
+        <div className="writeFormGroup">
+          <textarea
+            placeholder="Tell your story..."
+            type="text"
+            className="writeInput writeText"
+            onChange={(e) => setDesc(e.target.value)}
+          ></textarea>
+        </div>
+        <button className="writeSubmit" type="submit">
+          Publish
+        </button>
+      </form>
+    </div>
+  );
 }

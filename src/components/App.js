@@ -20,7 +20,7 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/stories/:id" element={<SingleStory />} />
-          <Route exact path="/stories/" element={<PostStory />} />
+          <Route exact path="/write/" element={<PostStory />} />
           <Route exact path="*" element={<NotFound />} />
         </Routes>
       </Layout>
