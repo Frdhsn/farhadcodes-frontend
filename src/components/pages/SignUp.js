@@ -36,8 +36,8 @@ const Signup = () => {
       console.log(`before authService`);
       const res = await authService.signUp(username, email, password).then(
         () => {
-          navigate('/'); // home page
-          //window.location.reload();
+          navigate('/'); // need to login again
+          window.location.reload();
         },
         (error) => {
           setError('Failed to create an account!');
