@@ -1,12 +1,18 @@
 /* account component */
 .account {
-    width: 50%;
+    width: 100%;
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     justify-content: flex-end;
     align-items: center;
     margin-right: 30px;
-    font-size: 12px;
+    font-size: 14px;
+    
+   /* display: inline-block;      */
+   /* position: relative;     */
+   /* z-index: 1;     
+   padding: 2em;     
+   margin: -2em;  */
   }
   
   .account > span:last-child {

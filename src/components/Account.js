@@ -20,17 +20,22 @@ export default function Account() {
   const handlePostStory = () => {
     navigate('/write');
   };
+  const showAllStory = () => {
+    navigate('/stories/user/' + user.data.user.id);
+  };
   return (
     <div className={classes.account}>
       {user ? (
         <>
-          <span title="Create a Story" onClick={handlePostStory}>
+          <span title="Create a blog" onClick={handlePostStory}>
             Write
           </span>
           <span className="material-icons-outlined" title="Account">
             account_circle
           </span>
-          <span>{user.data.user.name}</span>
+          <span title="Click to see all blogs of this user" onClick={showAllStory}>
+            {user.data.user.name}
+          </span>
           <span className="material-icons-outlined" title="Logout" onClick={logout}>
             {' '}
             logout{' '}
