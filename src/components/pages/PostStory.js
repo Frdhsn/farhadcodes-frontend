@@ -5,21 +5,37 @@ import '../../styles/write.css';
 
 export default function PostStory() {
   const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
+  const [topic, setTopic] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  const [description, setDesc] = useState('');
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
-      username: user.username,
+      authorID: user.data.user.id,
       title,
-      desc,
+      topic,
+      difficulty,
+      description,
     };
-
+    const token = user.data.token;
     try {
-      const res = await axios.post('http://127.0.0.1:3005/api/v1/stories', newPost);
-      window.location.replace('http://127.0.0.1:3005/api/v1/stories/' + res.data._id);
+      console.log(`before axios post story`);
+      console.log(newPost);
+      const instance = axios.create({
+        headers: {
+          'Acess-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const res = await instance.post('http://127.0.0.1:3005/api/v1/stories', newPost);
+      console.log(`printing ` + res);
+      //window.location.replace('http://127.0.0.1:3005/api/v1/stories/' + res.data._id);
+
+      console.log(`after axios post story`);
     } catch (err) {
       console.log(`something went wrong`);
     }
@@ -28,9 +44,6 @@ export default function PostStory() {
     <div className="write">
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
-          {/* <label htmlFor="fileInput">
-            <i className="writeIcon fas fa-plus"></i>
-          </label> */}
           <input
             type="text"
             placeholder="Title"
@@ -40,8 +53,26 @@ export default function PostStory() {
           />
         </div>
         <div className="writeFormGroup">
+          <input
+            type="text"
+            placeholder="Topic"
+            className="writeInput"
+            autoFocus={true}
+            onChange={(e) => setTopic(e.target.value)}
+          />
+        </div>
+        <div className="writeFormGroup">
+          <input
+            type="text"
+            placeholder="Difficulty"
+            className="writeInput"
+            autoFocus={true}
+            onChange={(e) => setDifficulty(e.target.value)}
+          />
+        </div>
+        <div className="writeFormGroup">
           <textarea
-            placeholder="Tell your story..."
+            placeholder="write tutorial here..."
             type="text"
             className="writeInput writeText"
             onChange={(e) => setDesc(e.target.value)}
