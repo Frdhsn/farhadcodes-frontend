@@ -102,13 +102,14 @@ export default function SingleStory() {
             <h1 className={classes.singleStoryTitle}>
               {title}
               {authorName === USER.name && (
-                <div className="singleStoryEdit">
-                  <Button onClick={() => setUpdateMode(true)}>Edit</Button>
+                <div>
+                  <span>
+                    <Button onClick={() => setUpdateMode(true)}>Edit</Button>
+                  </span>
                   {/* <Button color="#FF0000" onClick={handleDeleteSubmit}>
                     Delete
                   </Button> */}
                   <Button
-                    className="delete-button"
                     onClick={() => {
                       setModalOpen(true);
                     }}

@@ -21,8 +21,8 @@ export default function PostStory() {
     };
     const token = user.data.token;
     try {
-      console.log(`before axios post story`);
-      console.log(newPost);
+      //console.log(`before axios post story`);
+      //console.log(newPost);
       const instance = axios.create({
         headers: {
           'Acess-Control-Allow-Origin': '*',
@@ -34,9 +34,9 @@ export default function PostStory() {
       console.log(`printing ` + res);
       window.location.replace('http://localhost:3000/stories/user/' + user.data.user.id);
 
-      console.log(`after axios post story`);
+      //console.log(`after axios post story`);
     } catch (err) {
-      console.log(`something went wrong`);
+      //console.log(`something went wrong`);
     }
   };
   return (

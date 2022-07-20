@@ -68,6 +68,7 @@
   color: #666;
   font-size: 18px;
   line-height: 25px;
+  white-space: pre-wrap;
 }
 
 .singleStoryDesc::first-letter {
@@ -96,4 +97,20 @@
   cursor: pointer;
   align-self: flex-end;
   margin-top: 20px;
+}
+
+.buttonRED {
+  background: var(--successGreen);
+  color: rgb(173, 4, 4);
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 0px;
 }

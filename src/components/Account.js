@@ -27,15 +27,19 @@ export default function Account() {
     <div className={classes.account}>
       {user ? (
         <>
-          <span title="Create a blog" onClick={handlePostStory}>
-            Write
-          </span>
+          <div className={classes.accountClickable}>
+            <span title="Create a blog" onClick={handlePostStory}>
+              Write
+            </span>
+          </div>
           <span className="material-icons-outlined" title="Account">
             account_circle
           </span>
-          <span title="Click to see all blogs of this user" onClick={showAllStory}>
-            {user.data.user.name}
-          </span>
+          <div className={classes.accountClickable}>
+            <span title="Click to see all blogs of this user" onClick={showAllStory}>
+              {user.data.user.name}
+            </span>
+          </div>
           <span className="material-icons-outlined" title="Logout" onClick={logout}>
             {' '}
             logout{' '}

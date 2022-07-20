@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import image from '../assets/images/linkcut.png';
+import image from '../assets/images/WF.jpg';
 import classes from '../styles/Story.module.css';
 
 export default function Story({ post }) {
