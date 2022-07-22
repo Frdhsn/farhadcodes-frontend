@@ -22,7 +22,7 @@ export default function SingleStory() {
 
   let authorName, token;
   if (user) {
-    authorName = user.data.user.name;
+    authorName = user.data.name;
     token = user.data.token;
   }
   useEffect(() => {

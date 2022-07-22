@@ -6,10 +6,10 @@ import classes from './../styles/Account.module.css';
 export default function Account() {
   const { user, dispatch } = useContext(Context);
 
-  // console.log('testing ' + user);
+  //console.log('testing ' + user);
   // console.log('testing ' + user.data);
   // console.log('testing ' + user.data.email);
-  console.log(user);
+  //console.log(user);
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -37,7 +37,7 @@ export default function Account() {
           </span>
           <div className={classes.accountClickable}>
             <span title="Click to see all blogs of this user" onClick={showAllStory}>
-              {user.data.user.name}
+              {user.data.name}
             </span>
           </div>
           <span className="material-icons-outlined" title="Logout" onClick={logout}>

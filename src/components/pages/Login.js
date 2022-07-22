@@ -18,16 +18,16 @@ const Login = () => {
 
   const [error, setError] = useState('');
 
-  const { user, dispatch, isFetching } = useContext(Context);
+  //const { user, dispatch, isFetching } = useContext(Context);
+  const { dispatch, isFetching } = useContext(Context);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    console.log('handling login');
     e.preventDefault();
     dispatch({ type: 'LOGIN_START' });
     try {
       setError('');
-      //const email = userRef.current.value;
-      //const password = passwordRef.current.value;
       const res = await authService.login(email, password).then(
         () => {
           navigate('/');
@@ -38,6 +38,7 @@ const Login = () => {
           console.log(error);
         }
       );
+
       dispatch({ type: 'LOGIN_SUCCESSS', payload: res.data.data });
     } catch (err) {
       dispatch({ type: 'LOGIN_FAILURE' });
@@ -45,7 +46,20 @@ const Login = () => {
     }
   };
   //console.log(user);
-
+  // axios
+  // .post(`http://127.0.0.1:3005/api/v1/users/login`, { email, password })
+  // .then((res) => {
+  //   console.log('res.data' + res.data);
+  //   console.log('res.data.data' + res.data.data);
+  //   console.log('res.data.data.user' + res.data.data.user);
+  //   navigate('/');
+  //   window.location.reload();
+  //   dispatch({ type: 'LOGIN_SUCCESSS', payload: res.data.data });
+  // })
+  // .catch((err) => {
+  //   dispatch({ type: 'LOGIN_FAILURE' });
+  //   setError('error');
+  // });
   return (
     <>
       <h1>Login to your account</h1>

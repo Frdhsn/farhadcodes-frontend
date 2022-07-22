@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Context } from '../contexts/Context';
 import '../styles/App.css';
 import Layout from './Layout';
 import Home from './pages/Home';
@@ -12,7 +11,7 @@ import SingleStory from './pages/SingleStory';
 import StoryByUser from './pages/StoryByUser';
 
 const App = () => {
-  const { user } = useContext(Context);
+  //const { user } = useContext(Context);
   return (
     <Router>
       <Layout>

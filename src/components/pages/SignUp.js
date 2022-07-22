@@ -19,7 +19,8 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');
 
-  const { user, dispatch, isFetching } = useContext(Context);
+  //const { user, dispatch, isFetching } = useContext(Context);
+  const { dispatch, isFetching } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const Signup = () => {
       console.log(err);
     }
   };
+  console.log(loading);
   return (
     <>
       <h1>Create an account</h1>
