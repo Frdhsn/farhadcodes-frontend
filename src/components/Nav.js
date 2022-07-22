@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo-bg.jpg';
+import logo from '../assets/images/mylogo.png';
 import classes from '../styles/Nav.module.css';
 import Account from './Account';
 export default function Nav() {
