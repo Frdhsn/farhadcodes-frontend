@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import classes from '../styles/Pagination.module.css';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -13,7 +14,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       <div className="pagination">
         <a href="#">&laquo;</a>
         {pageNumbers.map((number) => (
-          <div key={number} className="pagination">
+          <div key={number} className={classes.pagination}>
             <Link onClick={() => paginate(number)} to="/" className="page-link">
               {number}
             </Link>

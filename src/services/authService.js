@@ -14,7 +14,7 @@ const signUp = (name, email, password) => {
       console.log(response.data.data);
       console.log(response.data.data.token);
 
-      if (response.data.data.token) {
+      if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       return response.data;
@@ -31,7 +31,7 @@ const login = (email, password) => {
       //console.log(response.data);
       // console.log(response.data.data);
       // console.log(response.data.data.token);
-      if (response.data.data.token) {
+      if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       //console.log(`response data ${response.data}`);

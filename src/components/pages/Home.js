@@ -7,7 +7,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(4);
+  const [postsPerPage] = useState(10);
   useEffect(() => {
     const fetchPosts = async () => {
       setloading(true);
