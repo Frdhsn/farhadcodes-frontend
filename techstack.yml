@@ -2,7 +2,7 @@ repo_name: Frdhsn/farhadcodes-frontend
 report_id: 75279c75c2a6ac242372e2133304c4ba
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-23T18:55:12+00:00'
+timestamp: '2024-02-29T19:36:08+00:00'
 requested_by: Frdhsn
 provider: github
 branch: master
@@ -81,7 +81,7 @@ tools:
   detection_source_url: https://github.com/Frdhsn/farhadcodes-frontend
   detection_source: Repo Metadata
 - name: Prettier
-  description: 'Prettier is an opinionated code formatter. '
+  description: Prettier is an opinionated code formatter.
   website_url: https://prettier.io/
   version: 1.19.1
   license: MIT
